@@ -13,19 +13,7 @@
       <day-type id="1" name="Nonworking" description="A default non working day"/>
       <day-type id="2" name="Use base" description="Use day from base calendar"/>
     </day-types>
-    <calendar id="1" name="fringe">
-      <default-week sat="0" sun="0"/>
-      <overridden-day-types>
-        <overridden-day-type id="0">
-          <interval start="1100" end="1300"/>
-          <interval start="1500" end="1800"/>
-        </overridden-day-type>
-      </overridden-day-types>
-      <days>
-        <day date="20161015" type="day-type" id="0"/>
-      </days>
-    </calendar>
-    <calendar id="2" name="Default">
+    <calendar id="1" name="Default">
       <default-week mon="0" tue="0" wed="0" thu="0" fri="0" sat="1" sun="1"/>
       <overridden-day-types>
         <overridden-day-type id="0">
@@ -35,57 +23,86 @@
       </overridden-day-types>
       <days/>
     </calendar>
+    <calendar id="2" name="fringe">
+      <default-week mon="0" tue="0" wed="0" thu="0" fri="0" sat="0" sun="0"/>
+      <overridden-day-types>
+        <overridden-day-type id="0">
+          <interval start="1000" end="1300"/>
+          <interval start="1500" end="1900"/>
+          <interval start="2100" end="2200"/>
+        </overridden-day-type>
+      </overridden-day-types>
+      <days>
+        <day date="20161015" type="day-type" id="0"/>
+      </days>
+    </calendar>
   </calendars>
   <tasks>
-    <task id="1" name="plan" note="" work="36000" start="20161014T000000Z" end="20161014T170000Z" work-start="20161014T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-      <task id="2" name="learn GNOME Planner " note="" work="7200" start="20161014T000000Z" end="20161014T100000Z" work-start="20161014T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
-      <task id="3" name="plan the project" note="" work="28800" start="20161014T000000Z" end="20161014T170000Z" work-start="20161014T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
-    </task>
-    <task id="4" name="analyze_problem" note="" work="57600" start="20161014T170000Z" end="20161017T170000Z" work-start="20161017T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="1" name="learn the basic of GNOME Planner " note="" work="7200" start="20161014T000000Z" end="20161014T120000Z" work-start="20161014T100000Z" percent-complete="94" priority="0" type="normal" scheduling="fixed-work"/>
+    <task id="2" name="plan the project" note="" work="7200" start="20161014T120000Z" end="20161014T160000Z" work-start="20161014T120000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
       <predecessors>
         <predecessor id="1" predecessor-id="1" type="FS"/>
       </predecessors>
-      <task id="5" name="brainstorm and write" note="" work="28800" start="20161014T170000Z" end="20161017T170000Z" work-start="20161017T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
-      <task id="6" name="write abstract" note="" work="28800" start="20161014T170000Z" end="20161017T170000Z" work-start="20161017T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
     </task>
-    <task id="7" name="design_a_solution" note="" work="115200" start="20161017T170000Z" end="20161018T170000Z" work-start="20161018T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="3" name="brainstorm and write" note="" work="10800" start="20161014T160000Z" end="20161014T190000Z" work-start="20161014T160000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
+      <predecessors>
+        <predecessor id="1" predecessor-id="2" type="FS"/>
+      </predecessors>
+    </task>
+    <task id="4" name="choose language and tools" note="" work="10800" start="20161014T190000Z" end="20161015T120000Z" work-start="20161014T190000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
+      <predecessors>
+        <predecessor id="1" predecessor-id="3" type="FS"/>
+      </predecessors>
+    </task>
+    <task id="5" name="draw some diagrams" note="" work="7200" start="20161015T120000Z" end="20161015T160000Z" work-start="20161015T120000Z" percent-complete="90" priority="0" type="normal" scheduling="fixed-work">
       <predecessors>
         <predecessor id="1" predecessor-id="4" type="FS"/>
       </predecessors>
-      <task id="8" name="choose language and tools" note="" work="28800" start="20161017T170000Z" end="20161018T170000Z" work-start="20161018T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
-      <task id="9" name="draw some diagrams" note="" work="28800" start="20161017T170000Z" end="20161018T170000Z" work-start="20161018T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
-      <task id="10" name="name the parts" note="" work="28800" start="20161017T170000Z" end="20161018T170000Z" work-start="20161018T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
-      <task id="11" name="subdivide into functions" note="" work="28800" start="20161017T170000Z" end="20161018T170000Z" work-start="20161018T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
     </task>
-    <task id="12" name="implement_a_solution" note="" work="172800" start="20161018T170000Z" end="20161019T170000Z" work-start="20161019T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="6" name="name the parts" note="" work="18000" start="20161015T160000Z" end="20161016T110000Z" work-start="20161015T160000Z" percent-complete="90" priority="0" type="normal" scheduling="fixed-work">
+      <predecessors>
+        <predecessor id="1" predecessor-id="5" type="FS"/>
+      </predecessors>
+    </task>
+    <task id="7" name="subdivide into functions" note="" work="18000" start="20161016T110000Z" end="20161016T180000Z" work-start="20161016T110000Z" percent-complete="50" priority="0" type="normal" scheduling="fixed-work">
+      <predecessors>
+        <predecessor id="1" predecessor-id="6" type="FS"/>
+      </predecessors>
+    </task>
+    <task id="8" name="develop backend" note="" work="28800" start="20161016T180000Z" end="20161017T180000Z" work-start="20161016T180000Z" percent-complete="50" priority="0" type="normal" scheduling="fixed-work">
       <predecessors>
         <predecessor id="1" predecessor-id="7" type="FS"/>
       </predecessors>
-      <task id="13" name="develop" note="" work="172800" start="20161018T170000Z" end="20161019T170000Z" work-start="20161019T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
-        <task id="14" name="write_backend" note="" work="28800" start="20161018T170000Z" end="20161019T170000Z" work-start="20161019T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
-        <task id="15" name="test backend" note="" work="28800" start="20161018T170000Z" end="20161019T170000Z" work-start="20161019T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
-        <task id="16" name="write_cli_frontend" note="" work="28800" start="20161018T170000Z" end="20161019T170000Z" work-start="20161019T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
-        <task id="17" name="test cli" note="" work="28800" start="20161018T170000Z" end="20161019T170000Z" work-start="20161019T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
-        <task id="18" name="write gui frontend" note="" work="28800" start="20161018T170000Z" end="20161019T170000Z" work-start="20161019T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
-        <task id="19" name=" test gui" note="" work="28800" start="20161018T170000Z" end="20161019T170000Z" work-start="20161019T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
-      </task>
     </task>
-    <task id="20" name="finalize for end user" note="" work="115200" start="20161019T170000Z" end="20161020T170000Z" work-start="20161020T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+    <task id="9" name="develop cli frontend" note="" work="7200" start="20161017T180000Z" end="20161017T220000Z" work-start="20161017T180000Z" percent-complete="100" priority="0" type="normal" scheduling="fixed-work">
       <predecessors>
-        <predecessor id="1" predecessor-id="12" type="FS"/>
+        <predecessor id="1" predecessor-id="8" type="FS"/>
       </predecessors>
-      <task id="21" name="write article abstract" note="" work="28800" start="20161019T170000Z" end="20161020T170000Z" work-start="20161020T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
-      <task id="22" name="write a user manual" note="" work="28800" start="20161019T170000Z" end="20161020T170000Z" work-start="20161020T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
-      <task id="23" name="choose_a_host" note="" work="28800" start="20161019T170000Z" end="20161020T170000Z" work-start="20161020T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
-      <task id="24" name="market_the_solution" note="" work="28800" start="20161019T170000Z" end="20161020T170000Z" work-start="20161020T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+    </task>
+    <task id="10" name="write article abstract" note="" work="3600" start="20161017T180000Z" end="20161017T190000Z" work-start="20161017T180000Z" percent-complete="70" priority="0" type="normal" scheduling="fixed-work">
+      <predecessors>
+        <predecessor id="1" predecessor-id="8" type="FS"/>
+      </predecessors>
+    </task>
+    <task id="11" name="write a user manual" note="" work="10800" start="20161017T190000Z" end="20161018T120000Z" work-start="20161017T190000Z" percent-complete="10" priority="0" type="normal" scheduling="fixed-work">
+      <predecessors>
+        <predecessor id="1" predecessor-id="10" type="FS"/>
+      </predecessors>
+    </task>
+    <task id="12" name="host on remote server" note="" work="3600" start="20161017T180000Z" end="20161017T190000Z" work-start="20161017T180000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <predecessors>
+        <predecessor id="1" predecessor-id="8" type="FS"/>
+      </predecessors>
     </task>
   </tasks>
-  <resource-groups/>
+  <resource-groups default_group="1">
+    <group id="1" name="developers" admin-name="" admin-phone="" admin-email=""/>
+  </resource-groups>
   <resources>
-    <resource id="1" name="Stefano Carlesso" short-name="Ste" type="1" units="0" email="" note="" std-rate="0"/>
-    <resource id="2" name="Desktop computer" short-name="" type="1" units="0" email="" note="" std-rate="0"/>
-    <resource id="3" name="remote git" short-name="" type="1" units="0" email="" note="" std-rate="0"/>
-    <resource id="4" name="remote webserver" short-name="" type="1" units="0" email="" note="" std-rate="0"/>
+    <resource group="1" id="1" name="Stefano Carlesso" short-name="Ste" type="1" units="0" email="stefanocarlesso@gmx.com" note="" std-rate="0"/>
+    <resource id="2" name="Desktop computer" short-name="" type="2" units="0" email="" note="" std-rate="0"/>
+    <resource id="3" name="remote git" short-name="" type="2" units="0" email="" note="" std-rate="0"/>
+    <resource id="4" name="remote webserver" short-name="" type="2" units="0" email="" note="" std-rate="0"/>
   </resources>
   <allocations/>
 </project>
