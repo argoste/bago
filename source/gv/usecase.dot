@@ -1,0 +1,8 @@
+digraph {
+    0 [shape=rectangle];
+    1 [shape=none image="man.png" label="Actor" labelloc=b];
+    2 [shape=ellipse];
+    1->2;
+ 
+   0 ->2;
+}

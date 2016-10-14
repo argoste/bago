@@ -1,0 +1,5 @@
+Casa extends Edificio
+
+Postino extends Persona
+
+Mare extends CorpoAcqueo

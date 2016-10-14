@@ -1,0 +1,13 @@
+class Dog
+class Animal
+class Cat
+Cat extends Animal
+Dog extends Animal
+class Plant
+class Lifeform
+Animal extends Lifeform
+Plant extends Lifeform
+Class Branch
+Class Tree
+Tree extends Plant
+Branch compose Tree

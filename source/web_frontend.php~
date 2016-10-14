@@ -1,0 +1,44 @@
+<?php
+//
+//require_once('');
+
+?>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pluto</title>
+        <meta charset="utf-8">
+        <style type="text/css">
+            form {
+                border: thin dashed darkgreen;            
+            }
+            figure {
+                margin-left: 0%;
+                margin-left: 0%;
+                border: thin dashed blue;            
+            }
+        </style>
+    </head>
+    <body>
+        <p>PLUTO FRONTEND</p>
+        <form action="" method="POST">
+        <div>Please give me a *.pluto file.</div>
+        <input name="input_file" type="file">
+        </form>
+        <textarea>
+    <?php
+                 if (isset($_POST['name'])) {
+        $name = $_POST['name'];
+    }
+    else {
+        $name = "(not entered)";
+    }
+    echo "Your name is: $name <br>"  
+    ?>  
+        </textarea>
+        <figure>
+            <figcaption>The output diagram</figcaption>
+            <img src="out.png" alt="the output image">        
+        </figure>
+    </body>
+</html>
