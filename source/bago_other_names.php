@@ -29,3 +29,23 @@ function dot_launcher ($filename) {
 }
 
 ?>
+
+<?php
+function  bagol_extract($input_text){
+    return $bclasses;
+}
+
+function bagol_makeclasses ($bcla) {
+    // Just the classes
+    return $bagol_classes;
+}
+function bagol_makedot ($dot_classes) {
+    echo "digraph {\n";
+    echo $dot_classes;
+    echo "}\n";
+    return $gv_file;
+}
+function bagol_launchdot ($gv_file) {
+    
+}
+?>

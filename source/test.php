@@ -1,5 +1,5 @@
 <?php
-require('pluto.php');
+require('lib.php');
 $test_diagram = '
 class Boat {weight, nation}
 note 1 {Nel mezzo del cammin di nostra vita
@@ -10,4 +10,4 @@ ché la diritta via era smarrita}
 	object Titanic
 
 ';
-echo pluto_transform($test_diagram);
+echo bagol_makedot($test_diagram);

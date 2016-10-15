@@ -1,6 +1,5 @@
-# Pluto
-
-pluto is a tool to draw UML Class Diagrams (Many other UML 2.0 diagrams are
+# The Bago software.
+**bago** is a tool to draw UML Class Diagrams (Many other UML 2.0 diagrams are
 planned, and also Flowchart and Entity-Relationship diagrams). You describe
 your diagrams with a simple, semantic, not style-oriented, language. The tool
 Then you draws the actual diagram.
@@ -36,16 +35,16 @@ to be as similar as possible to the good UMLGraph by [Diomidis
 Spinellis](http://www.spinellis.gr).
 
 
-Keep in mind that Pluto knows nothing about modelling, it does not understand
+Keep in mind that bago knows nothing about modelling, it does not understand
 your diagram. You are in charge for making the model meaningful and truthful. 
 
-## the pluto language
+## the bago language
 
-A Pluto file has extension `*.pluto`
+A bago file has extension `*.bago`
 
-A pluto file contains the declaration of UML elements.
+A bago file contains the declaration of UML elements.
 
-A valid Pluto file content is described using Extended Backus-Naur Form. The
+A valid bago file content is described using Extended Backus-Naur Form. The
 definition symbol is `:=`, a rule end with a semicolon, square brackets enclose
 optional parts.
 
@@ -89,18 +88,18 @@ alredy bored trying to understand UML.
 
 ## Implementation
 
-Any text editor can be used to write pluto files. For your convenience I will
+Any text editor can be used to write bago files. For your convenience I will
 try to provide Geany or Komodo Edit syntax highlight and autocompletions.
 
-The core is a php script that translates the Pluto file to a Graphviz script.
+The core is a php script that translates the bago file to a Graphviz script.
 Then the latter is compiled by the dot executable (the original C version or
 the ecmascript viz.js) into a diagram.
 
 ### CLI
 
-You run a script (`php pluto_cli.php mydiagram.pluto`) that There will be two
-frontends: + A PHP script to be run in terminal.
+You run a script (`php bago_cli.php mydiagram.bago`) and it will create a file called mydiagram.gv
 
-### GUI
-s
-A simple HTML+PHP application with integrated viewer.
+Then you can view the created diagram with [xdot](https://github.com/jrfonseca/xdot.py)
+or create the diagram from command line using the original [dot](http://www.graphviz.org) with `dot `
+## about the name
+I've checked the name **bago** here [](http://usersthink.com/startup-names/) and the file extension here [](http://filext.com/). The name has no real meaning, but it is inpired to _bagolaro_, the Italian name for _Celtis australis_, a tree of the Mediterranean basin.

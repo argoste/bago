@@ -11,7 +11,7 @@
 */
 // Multi-tools functions
 //TODO create namespace multi-tools;
-function read_file ($filename) {
+function bago_read_file ($filename) {
     // TAKE THE INPUT FILE AS A STRING
     $handle = fopen( $filename, 'r');
     if ($handle == false) {
@@ -23,7 +23,7 @@ function read_file ($filename) {
     return $content;
 }
 
-function create_file ($filename, $text){
+function bago_create_file ($filename, $text){
     // CREATE NEW FILE AD WRITE THE STRING
     $handle = fopen($filename, 'w');
     fwrite($handle, $text);
@@ -34,7 +34,7 @@ function create_file ($filename, $text){
 
 
 //Pluto-specific Functions
-function transform_1($input_text) {
+function bago_make_elements($input_text) {
 //PARSE THE RAW STRING
 //TODO Fix the semantic bugs
     $Element_array =  ['class', 'object', 'use case', 'actor','note',
@@ -159,7 +159,7 @@ function transform_1($input_text) {
     return $Out_text;
 }
 
-function transform_2 ($elements) {
+function bago_make_gv ($elements) {
     // THIS STRING will contain the text TO BE OUTPUT 
     $Out_text = "digraph{\n";
     //$Out_text .= parse_input($input_text);
@@ -176,19 +176,4 @@ function dot_launcher ($filename) {
 
 
 
-//THE TASKS 
-// $argv[1] is the first argument passed on command line
-if  ($argv[1] == false) {
-    echo "\nusage:\n php pluto.php mydiagram.pluto\n";
-    exit();
-}
 
-create_file(
-    'out.dot',
-    transform_2(
-        transform_1(
-            read_file(
-                $argv[1])
-        )
-    )
-);
