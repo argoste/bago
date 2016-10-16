@@ -1,16 +1,110 @@
 <?php
-/* Pluto language to graphviz preprocessor
-*
-* Simplest case: ID are only made of numbers, letters and underscore.
-*
-* This is a script to be executed from command line; it expects `dot`
-* executable  to be available in $PATH, so you need to install it either with
-* your package manager or from  http://graphviz.org
-*
-*  usage: `php pluto.php mydiagram.pluto`
-*/
-// Multi-tools functions
-//TODO create namespace multi-tools;
+/* Pluto language to graphviz preprocessor */
+
+function bago_show($variable){
+    // Alternative to var_dump(); for debugging purposes.
+    echo "\n.'+++++++++++++'.\n";
+    print_r($variable);
+}
+
+function bago_create_classes($input_text) {
+    // named captured subpattern (?<id>) 
+    $pattern = '%@class\s+(?P<id>\w+)\s*(?:\{(?P<body>.+)\}){0,1}%';
+    preg_match_all($pattern, $input_text, $matched_classes, PREG_SET_ORDER);
+    // [shape=record label="{Person | name\naddress\nage | eat() }"]
+    $nodes ='';
+    echo '$matched_classes:  '; print_r($matched_classes);
+    foreach ($matched_classes as $class) {
+        $id = $class['id'];
+        $properties_and_methods = preg_split('~[,;]+~', $class['body'] );
+        
+        $properties = preg_grep('~\w+\s*[^(]\z~', $properties_and_methods);
+        echo '$properties:  '; print_r($properties);
+        $methods = preg_grep('~\w+\s*\(~', $properties_and_methods);
+        echo '$methods:  '; print_r($methods);
+        
+        $nodes .= $id.'[shape=record label="{'.$id.'| ';
+        foreach($properties as $pro){ $nodes .= $pro.'\n';}
+        $nodes .= '| ';
+        foreach($methods as $met) {$nodes .= $met.'\n';}
+        $nodes .= '}"]  '."\n";
+    }
+    return $nodes;
+}
+
+function bago_create_relationships ($input_text) {
+        // ELEMENT TYPE IS SMALL EDGE aka an edge without label
+    $relationship_edge = array(
+        array('name'=>'generalization','keyword'=>'@extends','style'=>'arrowhead=onormal'),
+        array('name'=>'aggregation','keyword'=>'@sharedby','style'=>'arrowhead=odiamond'),
+        array('name'=>'composition','keyword'=>'@partof','style'=>'arrowhead=diamond'),
+        array('name'=>'association','keyword'=>'@assoc','style'=>'arrowhead=none'),
+    );
+    for ($y=0; $y<count($relationship_edge); $y++) {
+        $pattern = '~';
+        $pattern .= '\A';
+        $pattern .= '\s*';
+        //Here the head, a node
+        $pattern .= '(?<headnode>\w{1,})';
+        $pattern .= '\s{1,}';
+        $pattern .= $relationship_edge[$y]['keyword'];
+        //some space is needed
+        $pattern .= '\s{1,}';
+        //Here the tail, a node
+        $pattern .= '(?<tailnode>\w{1,})';
+        $pattern .= '~';
+        preg_match_all ($pattern, $input_text, $matches);
+        for ($x=0; $x<count($matches[0]); $x++) {
+            $trasformed_text .= $matches['headnode'][$x]
+            .' -> '
+            .$matches['tailnode'][$x]
+            .' ['.$relationship_edge[$y]['style'] . ' ]'. "\n";
+        }
+    }
+}
+function bago_create_actors($input_text) {
+        // ELEMENT TYPE IS SMALL NODE aka a node with a very short label 
+    $small_node = array (
+        array('name'=>'actor','keyword'=>'@actor','style'=>'shape=none image="img/actor.png"')
+        );
+    for ($y=0; $y<count($small_node); $y++) {
+        $pattern = '~';
+        $pattern .= $optional_space;
+        $pattern .= $small_node[$y]['keyword'];
+        $pattern .= '\s{1,}';
+        // named captured subpattern (?P<name>) 
+        $pattern .= '(?P<id>\w{1,})';
+        $pattern .= '~';
+        preg_match_all($pattern, $input_text, $matches);
+        for ($x=0; $x< count($matches[0]); $x++) {
+            $trasformed_text .= $matches['id'][$x].' ['.$small_node[$y]['style']. '];'."\n";
+        }
+    }
+}
+
+function bago_create_other_big_nodes($input_text) {
+        // ELEMENT TYPE IS BIG NODE aka a node with a long, multiline label
+    // like a class with properties and methods 
+    $big_node = array(
+        array('name'=>'class', 'keyword'=>'@class', 'style'=>'shape=record'),
+        //array('name'=>'object','keyword'=>'@object','style'=>'shape=record'),
+        //array('name'=>'use case','keyword'=>'@usecase','style'=>'shape=ellipse'),
+        //array('name'=>'note','keyword'=>'@note','style'=>'shape=note'),
+    );
+    for ($y=0; $y<count($big_node); $y++) {
+        bago_node();
+    }
+}
+
+function bago_create_digraph ($input_text) {
+    $digraph = "digraph{\n";
+    $digraph .= bago_create_classes ($input_text);
+    $digraph .= bago_create_relationships($input_text);
+    $digraph .= "\n}";
+    return $digraph;
+}  
+
+// Multipurpose functions
 function bago_read_file ($filename) {
     // TAKE THE INPUT FILE AS A STRING
     $handle = fopen( $filename, 'r');
@@ -32,148 +126,9 @@ function bago_create_file ($filename, $text){
     return 1;
 }
 
-
-//Pluto-specific Functions
-function bago_make_elements($input_text) {
-//PARSE THE RAW STRING
-//TODO Fix the semantic bugs
-    $Element_array =  ['class', 'object', 'use case', 'actor','note',
-    'association','generalization','aggregation','composition'];
-    //iterate over tags
-    foreach ($Element_array as $Category) {
-        switch ($Category) {
-            case 'class':
-                $Keyword='class';
-                $Style="shape=record";
-                break;
-            case 'object': 
-                $Keyword = 'object';
-                $Style = 'shape=record';
-                break;
-            case 'use case': 
-                $Keyword = 'usecase';
-                $Style = "shape=ellipse";
-                break;
-            case 'actor': 
-                $Keyword = 'actor';
-                $Style = 'shape=none image="man.png"';
-            break;
-            case 'note': 
-                $Keyword = 'note';
-                $Style = "shape=note";
-                break;
-            case 'generalization':
-                $Keyword = 'extends';
-                $Style = 'arrowhead=onormal';
-                break;
-            case 'aggregation':
-                $Keyword = 'sharedby';
-                $Style = 'arrowhead=odiamond';
-                break;
-            case 'composition':
-                $Keyword = 'partof';
-                $Style = 'arrowhead=diamond';
-                break;
-            case 'association':
-                $Keyword = 'assoc';
-                $Style = 'arrowhead=none';
-                break;
-        }
-        // Some recurrent strings to be used in REGEX
-        $Space ='\040{1,}'; //space
-        $X ='\040{0,}'; //optional space
-        $Captured = '(\w{1,})';
-        switch ($Category) {
-            case 'generalization':
-            case 'aggregation':
-            case 'composition':
-                // you can put spaces at the beginning of statement
-                $Pattern = '~\A\s{0,}'.$Captured.'\s{1,}'.$Keyword.'\s{1,}'.$Captured.'~';
-                break;
-            case 'class':
-            case 'object':
-            case 'use case':
-                // The node ID is needed to use that node in an edge statement
-                //you can omit the body
-                //var_dump($Space); var_dump($Captured);
-                $Pattern = '~\A\s{0,}'.$Keyword.''.$Space.$Captured.'{0,1}'.$X.'(?:\{{1}([^\}\{]{0,})\}{1}){0,1}~';
-                //var_dump($Pattern);
-                break;
-            case 'note':
-                //you can omit the ID but then I have to create  a label 
-                $Pattern = '~\A\s{0,}'.$Keyword.''.$Space.$Captured.'{0,1}'.$X.'\{{1}([^\}\{]{0,})\}{1}~';
-                break;
-            case 'actor':
-                // The body is omitted because the label mus be short, to not cover the sticky man!
-                $Pattern = '~\A\s{0,}'.$Keyword.''.$Space.$Captured.'{0,1}~';
-                break;
-            case 'association':
-                // the most complex, has the form of a function 
-                //associate{Author, Book, write, [1,n], [0,n]}
-                $Multiplicity= '\[{1}([^\]]{1,})\]{1}';
-                $Pattern= '~\a\s{1,}'.$Keyword.$X.'\{'.$X.$Captured.$X.'\,'.$X.$Captured.$X.'(?:\,'.$X.$Captured.$X.'(?:\,'.$X.$Multiplicity.$X.'(?:\,'.$X.$Multiplicity.$X.')'.')'.'){0,1}\}~';
-                break;
-        }
-        $Content = '$'.$Keyword;
-        preg_match_all($Pattern, $input_text, $Content);
-        $Matches = count($Content[0]);
-        $Num=0;
-        $Out_text = "";
-        while ($Num<$Matches) {
-            switch ($Category) {
-                case 'generalization':
-                case 'aggregation':
-                case 'composition':
-                    $Out_text .= $Content[1][$Num].'->'.$Content[2][$Num].' ['.$Style.']'."\n;";
-                    break;
-                case 'association':
-                    $Out_text .= "$Content[1][$Num] -> $Content[2][$Num] [$Style label=\"$Content[3][$Num]\" taillabel=\"$Content[4][$Num]\" headlabel=\"$Content[5][$Num]\" ]\n;";
-                    break;
-                case 'actor':
-                    $Out_text .= $Content[1][$Num].' ['.$Style.' ];'."\n" ;
-                    break;
-                case 'use case':
-                case 'note':
-                    $Safe_content = preg_replace('~\"~', '\"', $Content[2][$Num]) ;
-                    $Foo = $Content[1][$Num];
-                    if ($Foo == "") {
-                        $Foo = hash('md5', $Safe_content);
-                    }
-                    $Out_text .= $Foo . ' ['.$Style.' label="'.$Safe_content.'"'.'];'."\n";
-                    break;
-                case 'class':
-                case 'object':
-                    //the first captured group is the ID of the node
-                    $Body_array = preg_split('~\,~', $Content[2][$Num]);
-                    //5 [shape=record label="{Person | name\naddress\nage | eat() }"]
-                    $Out_text .= $Content[1][$Num].'['.$Style.' label="{';
-                    foreach ($Body_array as $Ba) {
-                        $Out_text .= $Ba. '\n';
-                    }
-                    $Out_text .= '}"];'."\n";                
-                    break;
-            }
-            $Num ++;
-        }
-        }
-    return $Out_text;
-}
-
-function bago_make_gv ($elements) {
-    // THIS STRING will contain the text TO BE OUTPUT 
-    $Out_text = "digraph{\n";
-    //$Out_text .= parse_input($input_text);
-    $Out_text .= $elements;
-    $Out_text .= "}\n";
-    return $Out_text;
-}
-
-
-function dot_launcher ($filename) {
+function bago_launch_gv ($filename) {
     // EXECUTE GRAPHVIZ DOT
     return shell_exec('/usr/bin/dot '. $filename);
 }
 
-
-
-
+?>

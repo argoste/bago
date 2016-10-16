@@ -1,0 +1,3 @@
+@class sedia {marca, prezzo()}
+@class quadro {autore, tecnica, stupisci()} 
+@class elica {ruota() ,verso, trita()}

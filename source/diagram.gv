@@ -1,0 +1,7 @@
+digraph{
+color[shape=record label="{color| hexvalue\n|  apply_to_object()\n}"]  
+sedia[shape=record label="{sedia| marca\n|  prezzo()\n}"]  
+quadro[shape=record label="{quadro| autore\n tecnica\n|  stupisci()\n}"]  
+elica[shape=record label="{elica| verso\n| ruota() \n trita()\n}"]  
+
+}
