@@ -1,0 +1,6 @@
+digraph{
+Opus[shape=record label="{Opus|title\n | }" ]
+Author[shape=record label="{Author|surname\n first_name\n born_in\n | }" ]
+Publisher[shape=record label="{Publisher|city\n | }" ]
+
+}

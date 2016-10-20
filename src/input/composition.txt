@@ -1,0 +1,9 @@
+@class Tool {intended_usage, cost, act()}
+@class Screwdriver {tip_category, diameter, turn()}
+handle @partof Screwdriver
+blade @partof Screwdriver
+bit @partof Screwdriver
+
+@class Author
+@class Opus
+Author @assoc Opus

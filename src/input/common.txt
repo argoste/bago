@@ -1,0 +1,95 @@
+actor ste
+actor customer
+actor coconne/* a class diagram contains at least the following elements
+ classes and relationship */
+@class Bicycle {
+    barcode: integer,
+    price: float,
+    supplier: integer,
+    moveTo()
+}
+
+
+/* a Generalization */
+BMX @extend Bicycle
+MTB @extend Bicycle
+
+/* a Composition, a strong form of aggregation */
+wheel @partof Bicycle {,"1", "2"}
+frame @partof Bicycle {,"1", "1"}
+
+/* Aggregation, or weak aggregation*/
+Office @sharedby Company
+RetailOutlet @sharedby Company
+
+Person @assoc Bicycle {"owns", "0..n", "0..1"}
+
+@actor "Sales Manager"
+@usecase "print weekly report"
+
+@actor a2 "Chief Editor"
+@usecase u3 "Manage Editors schedule"
+@usecase u4 "empty trash bins"
+a2 -- {u3, u4}usecase Find_book
+class Person {name, address, age, eat()}
+class Cat
+class Cow {
+    production,
+    is_mad: Bool
+}
+
+class Animal
+class Cat {}
+Cat extends Animal
+Dog extends Animal
+object Lassie
+object Garfield
+object Orfeo
+note {Nel caso di pioggia, consultare l'ombrellaio}
+class Plant
+class Lifeform
+Animal extends Lifeform
+Plant extends Lifeform
+Class Branch
+Class Tree
+Tree extends Plant
+Branch partof Tree
+class ClassDiagram
+Casa extends Edificio
+Postino extends Persona
+Mare extends CorpoAcqueo
+usecase 1 {maintain money data}
+usecase {retrieve animal owner}
+
+
+Author "write" book
+
+associate{Author, Book, write, [1,n], [0,n]}
+class Dog
+class Animal
+class Cat
+Cat extends Animal
+Dog extends Animal
+class Plant
+class Lifeform
+Animal extends Lifeform
+Plant extends Lifeform
+Class Branch
+Class Tree
+Tree extends Plant
+Branch compose Tree
+@class sedia {marca, prezzo()}
+@class quadro {autore, tecnica, stupisci()} 
+@class elica {ruota() ,verso, trita()}note thi_is_a_note
+
+
+note 2 { lorem ipsum que faseullus mihi }Casa extends Edificio
+
+Postino extends Persona
+
+Mare extends CorpoAcqueo
+@class Tool {intended_usage, cost}
+@class Screwdriver {tip_category, diameter}
+Screwdriver @extends Toolusecase manage_customers
+
+note thi_is_a_note

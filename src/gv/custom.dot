@@ -1,0 +1,7 @@
+digraph {
+    0 [shape=rectangle];
+    1 [shape=custom shapefile="man.png"];
+    2 [shape=ellipse];
+ 
+   0 ->2;
+}

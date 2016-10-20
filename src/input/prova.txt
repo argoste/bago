@@ -1,0 +1,5 @@
+@class Opus {title}
+@class Author {surname, first_name, born_in}
+Author {1s} @assoc Opus
+@class Publisher {city}
+Publisher @assoc Opus

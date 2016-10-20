@@ -1,0 +1,5 @@
+# This is a Luddite program, to be compiled to obtain a lexer for my language
+# 'Bago' and packaget to use with Komodo Edit 9
+#  a command is terminated by either a newline or a semicolon
+family markup
+keywords ["@class", "@assoc", "@extends", "sharedby", "partof"]
