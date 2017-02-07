@@ -3,3 +3,4 @@
 Author {1s} @assoc Opus
 @class Publisher {city}
 Publisher @assoc Opus
+Page @partof Opus

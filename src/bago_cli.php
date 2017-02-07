@@ -6,7 +6,8 @@
 *
 *  usage: `./bago-cli.php mydiagram.txt`
 */
-require('bago.php');
+include_once('bago.php');
+include_once('bago_io.php');
 // $argv[1] is the first argument passed on command line
 if  ($argv[1] == false) {
     echo "\nusage:\n php bago.php mydiagram.txt\n";

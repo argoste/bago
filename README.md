@@ -1,3 +1,3 @@
 # Bago tool
 
-Bago is a tool to draw diagrams. More information on [the manual](source/doc/manual.md).
+Bago is a tool to draw diagrams. More information on [the manual](src/doc/manual.md).

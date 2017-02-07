@@ -1,4 +1,6 @@
-Make sure the `gv` and `svg` extensions are substittuted to `txt` not addes.
+is it a better idea to put EBNF definitions inside the code, in docstrings?
+
+Make sure the `gv` and `svg` extensions are substituted to `txt` not addes.
 
 Add detailed instruction for GNU/Linux.
 Add detailed instructions for MS.
@@ -17,7 +19,7 @@ TODO add instantiation_statement
 TODO add note_statement to class diagrams. This is tricky: I want a node with note content and an edge to connect them.
 
 ~~~
-property = [ownership], identifier, [':', type], ['=' default_value] 
+property = [ownership], identifier, [':', type], ['=' default_value]
 ownership = '@private' | '@public'    
 ~~~
 
