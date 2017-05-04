@@ -15,11 +15,11 @@ be repeated (zero or more times) are between`(:` and `:)`. Terminals, i.e.
 parts to be inserted verbatim, are enclosed in single o double quotes.
 
 
-## Class Diagrams
+## Class Diagrams and Usecase Diagrams
 
 ~~~
 
-diagram = (: class_statement | relationship_statement  :) .
+diagram = (: class_statement | relationship_statement| actor_statement | usecase_statement  :) .
 
 class_statement = "@class", identifier, (/ "{", (/ property_list /), (/ method_list /), "}" /) .
 
@@ -47,10 +47,16 @@ association_statement = identifier (/, multiplicity /) ,  @assoc (/, association
 association_name = "{", (?a string of characters?), "}" .
 
 
-comment = "//", (?a string of characters?), endofline .
+comment = "//", (?a string of characters?), eol .
 
-endofline = (? ASCII 0x0D Carriage Return ?)
+eol = (? ASCII 0x0D Carriage Return ?)
 
 ~~~
 
 Comma is used to separate each property or methods.
+
+
+## Usecase diagram
+~~~
+diagram = (:  :) .
+actor_statement = '@actor', identifier, eol .

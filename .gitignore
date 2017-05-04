@@ -1,0 +1,6 @@
+# files ignored by Git
+# a leading `**/` means ‘in all directories’
+# Python Virtual environments
+**/venv
+# Python cache
+**/__pycache__

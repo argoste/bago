@@ -1,0 +1,6 @@
+// An example digraph
+digraph {
+	A [label="King Arthur"]
+	B [label=Ginevra]
+		A -> B
+}

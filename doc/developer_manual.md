@@ -12,8 +12,10 @@ Some UML drawing tools are based on direct manipulation. Other use a textual
 description of the diagram. Text-based tools can be beneficial for many reason.
 
 + The developer uses his/her favourite text editor, and don't have to switch to
-another tool to do diagrams. + Version Control friendly. + You don't have to
-sopend time rearranging your diagram, the tool does it.
+another tool to do diagrams.
++ Version Control friendly.
++ You don't have to spend time rearranging your diagram, the tool does that
+for you.
 
 There are many tools like this. There is Plantuml, UMLGraph, Mermaid. Why make
 another? Because I want a language that describes the semantics of the
@@ -30,8 +32,8 @@ standalone or embedded in MarkDown documents (á la Mermaid). The language try
 to be as similar as possible to the good UMLGraph by [Diomidis
 Spinellis](http://www.spinellis.gr).
 
-Keep in mind that bago knows nothing about modelling, it does not understand
-your diagram. You are in charge for making the model meaningful and truthful. 
+Keep in mind that bago knows nothing about modelling, nor it understands
+your diagram. You are in charge for making the model meaningful and truthful.
 
 
 
@@ -100,7 +102,7 @@ pattern                 | what it does
 `\d` | any decimal digit
 `\D` | not a decimal digit
 `\h` | any horizontal whitespace character
-`\H` | 
+`\H` |
 `\s` | any whitespace character
 `w`  | any Perl word charater
 
@@ -110,4 +112,3 @@ inside square brackets the only meta-characters are `\` `^` `-`
 Modifiers
 
 multiline `m`: when this modifier is set `\A` matches a
-
